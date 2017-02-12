@@ -261,7 +261,7 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_refresh) {
             // COMPLETED (46) Instead of setting the text to "", set the adapter to null before refreshing
            // mWeatherTextView.setText("");
-            mForecastAdapter= null;
+            mForecastAdapter=  new ForecastAdapter(null);
             loadWeatherData();
 
             return true;
