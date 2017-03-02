@@ -21,7 +21,10 @@
         android:icon="@drawable/abc_ic_menu_share_mtrl_alpha"
         android:title="@string/action_share"
         app:showAsAction="always"/>
+    <item android:id="@+id/action_detail_setting"
+          android:title="@string/action_setting"
+          app:showAsAction="never"/>
 
-    <!--TODO (5) Add a Settings option to the detail menu-->
+    <!--COMPLETED (5) Add a Settings option to the detail menu-->
 
 </menu>

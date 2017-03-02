@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forecast);
 
+
         /*
          * Using findViewById, we get a reference to our RecyclerView from xml. This allows us to
          * do things like set the adapter of the RecyclerView and toggle the visibility.
@@ -143,6 +144,7 @@ public class MainActivity extends AppCompatActivity implements
         getSupportLoaderManager().initLoader(loaderId, bundleForLoader, callback);
 
         Log.d(TAG, "onCreate: registering preference changed listener");
+
     }
 
     /**
@@ -345,12 +347,17 @@ public class MainActivity extends AppCompatActivity implements
             openLocationInMap();
             return true;
         }
+        if (id== R.id.action_setting){
+           Intent  intent = new Intent(this,SettingsActivity.class);
+           startActivity(intent);
+            return  true ;
+        }
 
-        // TODO (1) Add new Activity called SettingsActivity using Android Studio wizard
+        // COMPLETED (1) Add new Activity called SettingsActivity using Android Studio wizard
         // Do step 2 in SettingsActivity
-        // TODO (2) Set setDisplayHomeAsUpEnabled to true on the support ActionBar
+        // COMPLETED (2) Set setDisplayHomeAsUpEnabled to true on the support ActionBar
 
-        // TODO (6) Launch SettingsActivity when the Settings option is clicked
+        // COMPLETED (6) Launch SettingsActivity when the Settings option is clicked
 
         return super.onOptionsItemSelected(item);
     }
