@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
         getSupportLoaderManager().initLoader(WEATHER_LOADER_ID, null , this);
 
         /* Once all of our views are setup, we can load the weather data. */
-        //loadWeatherData();
+        loadWeatherData();
     }
 
     /**
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
         showWeatherDataView();
 
         String location = SunshinePreferences.getPreferredWeatherLocation(this);
-         getSupportLoaderManager().restartLoader(WEATHER_LOADER_ID,null, this );
+        getSupportLoaderManager().restartLoader(WEATHER_LOADER_ID,null, this );
 
        // new FetchWeatherTask().execute(location);
     }
@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
     // COMPLETED (4) When the load is finished, show either the data or an error message if there is no data
     @Override
     public Loader<String[]> onCreateLoader(int id, Bundle args) {
-        return  new AsyncTaskLoader<String[]>(this) {
+        return  new AsyncTaskLoader<String[]>(this){
              String mWeatherData []= null ;
             @Override
             protected void onStartLoading() {
@@ -139,18 +139,13 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
                    mLoadingIndicator.setVisibility(View.VISIBLE);
                    forceLoad();
                }
-
             }
 
             @Override
-            public String[] loadInBackground() {
-
+            public String[] loadInBackground(){
                 String locationQuery = SunshinePreferences
                         .getPreferredWeatherLocation(MainActivity.this);
-
-
                 URL weatherRequestUrl = NetworkUtils.buildUrl(locationQuery);
-
                 try {
                     String jsonWeatherResponse = NetworkUtils
                             .getResponseFromHttpUrl(weatherRequestUrl);
@@ -256,10 +251,8 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
     private void openLocationInMap() {
         String addressString = "1600 Ampitheatre Parkway, CA";
         Uri geoLocation = Uri.parse("geo:0,0?q=" + addressString);
-
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(geoLocation);
-
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         } else {
@@ -281,19 +274,16 @@ public class MainActivity extends AppCompatActivity implements ForecastAdapterOn
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
         // COMPLETED (5) Refactor the refresh functionality to work with our AsyncTaskLoader
-        if (id == R.id.action_refresh) {
+        if (id == R.id.action_refresh){
             mForecastAdapter.setWeatherData(null);
             loadWeatherData();
             return true;
         }
-
         if (id == R.id.action_map) {
             openLocationInMap();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
